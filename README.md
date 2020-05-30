@@ -18,7 +18,9 @@ python3 peFastq2LoxDel.py
 ```
 User can change the inverted repeat to detect, the genome and blast settings directly in that script. As alternative, [seFastq2LoxDel](seFastq2LoxDel.py) process the paired reads separatedly to detect inverted repeats and then pastes the sequences, allowing for extra coverage but also, in our experience, a lot of off-target signals.
 
-3. **3.1**) Edit [Blast2LoxDel](Blast2LoxDel.py) with the file of interest to process and run:
+3. Filter the blast file to take those reads covering a deletion point:
+
+   **3.1**) Edit [Blast2LoxDel](Blast2LoxDel.py) with the file of interest to process and run:
 ```{bash}
 python3 Blast2LoxDel.py
 ```
