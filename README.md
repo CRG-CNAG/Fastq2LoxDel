@@ -24,4 +24,5 @@ User can change the inverted repeat to detect, the genome and blast settings dir
 ```{bash}
 python3 Blast2LoxDel.py
 ```
+
    **3.2**) Alternatively and preferred, this step is thought to be performed in a python environment importing the function *filter_deletions* from this script.
