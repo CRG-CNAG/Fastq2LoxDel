@@ -44,6 +44,7 @@ def filter_deletions(inFile, n=2,
     blast_all = process_blast(inFile, evalue_thr=evalue_thr, aln_len_thr=aln_len_thr, identity_thr=identity_thr)
     comp_rs = {}
     rs = {}
+    delpoints = {}
     for k, v in blast_all.items():
         if len(v)==2:
             evalueA, qstartA, qendA, sstartA, sendA = v[0]
@@ -54,10 +55,22 @@ def filter_deletions(inFile, n=2,
                 st, en = sorted([sstartA, sendA, sstartB, sendB])[1:3]
                 del_ide = str(bin_dictionary[st])+'..'+str(bin_dictionary[en])
                 comp_rs[k] = [st, en, del_ide]
+
+                # Extract coordinates of the sides of deletions
+                if st in delpoints:
+                    delpoints[st]+=1
+                else:
+                    delpoints[st]=1
+                if en in delpoints:
+                    delpoints[en]+=1
+                else:
+                    delpoints[en]=1
+
+
                 if del_ide in rs:
                     rs[del_ide].append(k)
                 else:
                     rs[del_ide] = [k]
-    return comp_rs, rs
+    return comp_rs, rs, delpoints
 
-all_dels, filt_dels = filter_deletions('<file generated with LoxDel_paired or LoxDel_singe>')
+all_dels, filt_dels, delpoints = filter_deletions('<file generated with LoxDel_paired or LoxDel_singe>')
